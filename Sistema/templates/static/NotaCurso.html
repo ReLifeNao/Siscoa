@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <span>NOTAS</span>
+
+    
+    
+    
+
+    
+
+
+
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Cod_Estudiante</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Bimestre1</th>
+            <th scope="col">Bimestre2</th>
+            <th scope="col">Bimestre3</th>
+            <th scope="col">Bimestre4</th>
+            <th scope="col">Promedio</th>
+            <th scope="col">Observaciones</th>
+            
+            
+          </tr>
+        </thead>
+
+
+        <tbody>
+            {% for student in Estudiante %}
+            
+
+                {% csrf_token %}
+          <tr>
+
+            
+            
+            
+            
+                <td>{{student.Id_Estudiante.Id_Estudiante}}</td>
+                <td>{{student.Id_Estudiante.Apellidos}}</td>
+                <td>{{student.Id_Estudiante.Nombres}}</td>
+              <td>{{ student.Id_Bimestre.Bimestre1 }}</td>
+              <td> {{ student.Id_Bimestre.Bimestre2 }}</td>
+                <td>{{ student.Id_Bimestre.Bimestre3 }}</td>
+                <td>{{ student.Id_Bimestre.Bimestre4 }}</td>
+
+                
+                
+            
+            
+            <td>Promedio</td>
+            <td>Observaciones</td>
+            
+
+            
+          </tr>
+          
+            
+            
+            
+
+          {% endfor %}
+          
+
+        </tbody>
+      </table>
+
+
+</body>
+</html>

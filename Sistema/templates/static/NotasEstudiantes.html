@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Notas</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    {% load fontawesome_5 %}    
+    {% load static %}
+   
+	<link rel="stylesheet" type='text/css' href="{% static 'main.css' %}">
+	<script src="{% static 'js/sweetalert2.min.js' %}"></script>
+    {% load bootstrap4 %}
+ 
+	  {# CSS Bootstrap #}
+      {% bootstrap_css %}
+      {% fontawesome_5_static %}
+    
+      
+</head>
+
+<body class="cover" >
+
+  {% csrf_token %}
+
+  
+
+	<table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Cod_Estudiante</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Bimestre1</th>
+            <th scope="col">Bimestre2</th>
+            <th scope="col">Bimestre3</th>
+            <th scope="col">Bimestre4</th>
+            <th scope="col">Promedio</th>
+            <th scope="col">Observaciones</th>
+            <th scope="col">Accion</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for student in Notas %}
+            <form action="/Edit/{{student.Id_Bimestre.Id_Bimestre}}/{{ student.Id_Materia.Id_Materia }}/{{ student.Id_SalonC.Id_Salon}}" id="{{student.Id_Bimestre.Id_Bimestre}}/{{ student.Id_Materia.Id_Materia }}/{{ student.Id_SalonC.Id_Salon}}" method="post" >
+
+                {% csrf_token %}
+          <tr>
+
+
+              <td>{{ student.Id_Estudiante.Id_Estudiante }}</td>
+              <td> {{ student.Id_Estudiante.Apellidos }}</td>
+                <td>{{ student.Id_Estudiante.Nombres }}</td>
+
+                <td> <input type="number" value="{{ student.Id_Bimestre.Bimestre1 }}" name="Bimestre1"class="f2"></td>
+                <td> <input type="number" value="{{ student.Id_Bimestre.Bimestre2 }}" name="Bimestre2"class="f2"></td>
+                <td> <input type="number" value="{{ student.Id_Bimestre.Bimestre3 }}" name="Bimestre3"class="f2"></td>
+                <td> <input type="number" value="{{ student.Id_Bimestre.Bimestre4 }}" name="Bimestre4"class="f2"></td>
+                
+            
+            
+            <td>Promedio</td>
+            <td>Observaciones</td>
+            <td>
+                
+              <button type="submit" class='Send'> GUARDAR </button>
+                
+                
+            </td>
+
+            
+          </tr>
+          
+            </form>
+            
+            
+
+          {% endfor %}
+          
+
+        </tbody>
+      </table>
+    
+      <a href="/DocenteCursos" class="">Return</a>
+
+
+	
+
+
+
+</body>
+
+</html>

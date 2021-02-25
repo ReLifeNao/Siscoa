@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load fontawesome_5 %}    
+    {% load static %}
+   
+    <title>Document</title>
+
+<style>
+    html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background:url(https://i.pinimg.com/736x/d8/cf/90/d8cf90fc4aef6141ee60620b46ab001d.jpg)
+			no-repeat center center fixed !important;
+			-webkit-background-size: cover !important;
+			-moz-background-size: cover !important;
+			-o-background-size: cover !important;
+			background-size: cover !important;
+		}
+    .boton {
+      position: absolute;
+      left: 50% !important;
+    }
+  </style>
+
+    {% load bootstrap4 %}
+ 
+	  {# CSS Bootstrap #}
+      {% bootstrap_css %}
+      {% fontawesome_5_static %}
+    
+      
+</head>
+
+<body class="cover" >
+
+  {% csrf_token %}
+
+  
+  <nav class="navbar navbar-dark bg-dark">
+    <h1 style="color: white;">Administrar Estudiantes </h1>
+  </nav>
+  
+  <table class="table table-hover">
+    <thead >
+      <tr>
+        <th scope="col">Cod_Estudiante</th>
+        <th scope="col">Estudiante</th>
+        <th scope="col">Salon</th>
+        <th scope="col">Accion</th>
+        
+    </tr>
+</thead>
+<tbody>
+
+    {% for Al in Alumnos %}
+    <form action="/AsignarSalon/{{ Al.Id_Estudiante }}" id="{{ Al.Id_Estudiante }}" method="post" >
+    {% csrf_token %}
+    <tr>
+        <td>{{Al.Id_Estudiante}}</td>
+            <td>{{Al.Nombres}}</td>
+    
+                <td><input  type='number'value="{{ Al.Salon.Id_Salon }}" name="Salon" id="Salon" class="f2"></td>
+
+    
+            
+                <td><button type="submit" class="btn btn-success"> Guardar </button></td>
+
+</tr>
+        </form>
+    {%endfor%}
+
+    
+
+</body>
+</html>

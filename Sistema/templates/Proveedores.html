@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load fontawesome_5 %}
+    {% load static %}
+    <link rel="stylesheet" type='text/css' href="{% static 'pruu.css' %}">
+
+  
+    {% load bootstrap4 %}
+ 
+	  {# CSS Bootstrap #}
+      {% bootstrap_css %}
+      {% fontawesome_5_static %}
+     
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+    
+</head>
+
+
+
+{% include 'NavBar.html' %}
+
+
+<body>
+    
+  {% include 'Sidebar.html' %}
+
+
+<div class="contenedor">
+    <div class="grid-item1"><div class="Ver">Ver Proveedores</div><div class="plus"><a href="/ProveedoresAdd"><i class="fas fa-plus"style="color:rgb(255, 255, 255);"></i></a></div>
+        </div>
+    <div class="grid-item2">
+            
+            <div class="table-wrapper-scroll-y my-custom-scrollbar"><table class="table-striped">
+                <thead class="thead-dark">
+                    
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Ruc</th>
+                        <th>Accion</th>
+                        
+                      </tr>
+                </thead>
+                <tbody class="">
+                {% for Productix in Proveedores %}
+                <tr>
+                <td>{{Productix.id}}</td>
+                <td>{{Productix.Nombre}}</td>
+                <td>{{Productix.Numero_Contacto}}</td>
+                <td>{{Productix.Ruc}}</td>
+                
+                
+                <td>
+                    <a href="/EditProveedores/{{Productix.id}}" class="plus2">
+                        <i class="fas fa-edit"style="color:rgb(255, 255, 255);"></i>
+                    </a>
+                    <a href="/delete1/{{Productix.id}}" class="plus3" >
+                        <i class="fas fa-trash-alt"style="color:rgb(255, 255, 255);"></i>
+                    </a>
+                    
+                </td>
+                </tr>
+                {% endfor %}
+                
+                </tbody>
+                    </table></div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
