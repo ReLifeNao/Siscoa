@@ -6,7 +6,7 @@ from Sistema.forms import CreateUserForm
 from django.contrib.auth import authenticate, login , logout
 from django.contrib import messages
 import logging
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,Http404
 from django.urls import reverse
 from datetime import date
 
@@ -15,8 +15,11 @@ logger = logging.getLogger("mylogger //// ")
 
 
 #MODULO DOCENTE:
+def adminhtml(request):
 
+    context = {}
 
+    return render(request,"Sistema/admin.html",context)
 
 
 
@@ -24,33 +27,39 @@ def NotasView(request):
     
     
     NotasAlumnos = Notas.objects.all()
+    context = {
+        'Notas':NotasAlumnos,
+    }
     
-    return render(request,"NotasEstudiantes.html",{'Notas':NotasAlumnos})
+    return render(request,"Sistema/NotasEstudiantes.html",context)
 
 
 
 def AdministradorView(request):
     
-    
     AdministradorV = Administrador.objects.all()
+    context = {
+        'Administrador':AdministradorV,
+    }
     
-    return render(request,"administrador.html",{'Administrador':AdministradorV})
+    
+    return render(request,"Sistema/administrador.html",context)
 
 def EstudiantesNotas(request):
     
     
     EstudianteNotes = Estudiante.objects.all()
+    context = {
+        'Estudiante':EstudianteNotes,
+    }
     
-    return render(request,"NotasEstudiantes.html",{'Estudiante':EstudianteNotes})
+    return render(request,"Sistema/NotasEstudiantes.html",context)
 
 
 
 def Delete(request, id):
     EstudiantesD= Estudiante.objects.get(id=id)
-    #ids=id
-    #connect = cx_Oracle.connect('c##jhonny/ilonandraon@localhost') 
-    #cursor = connect.cursor()
-    #cursor.execute(""" DELETE FROM Base_Productos WHERE Id=:arg_1 """,{"arg_1":ids})
+    
     EstudiantesD.delete()
     return redirect("/EstudianteNotas")
 
@@ -99,7 +108,7 @@ def DocenteCursos(request):
     #Materias = Materia.objects.get(Id_Docente=username)
     DocenteCursos = Materia.objects.filter(Id_Docente=instancia.Id_Docente  )
     
-    return render(request,"Docente.html",{'Docente':DocenteCursos})
+    return render(request,"Sistema/Docente.html",{'Docente':DocenteCursos})
 
 def Login(request):
     
@@ -115,7 +124,7 @@ def Login(request):
         else:
             messages.info(request, 'Username Or paSsword is incorrect ')
     context = {}
-    return render(request,"login.html",context)
+    return render(request,"Sistema/login.html",context)
 
 def Register(request):
     Form = CreateUserForm()
@@ -142,7 +151,7 @@ def Register(request):
 
 
     
-    return render(request,"register.html", context )
+    return render(request,"Sistema/register.html", context )
 
 def logoutUser(request):
     logout(request)
@@ -153,7 +162,7 @@ def SalonMateria(request,id):
     classAlumnos =instanciaSalon.Id_Salon.Id_Salon
     NotasAlumnos = Notas.objects.filter(Id_SalonC=classAlumnos,Id_Materia=id)
     
-    return render(request,"NotasEstudiantes.html",{'Notas':NotasAlumnos})
+    return render(request,"Sistema/NotasEstudiantes.html",{'Notas':NotasAlumnos})
 
 
 
@@ -171,7 +180,7 @@ def EstudianteView(request):
     
     Materias = Materia.objects.filter(Id_Salon=Salon)
     
-    return render(request,"estudiante.html",{'Estudiante':Materias})
+    return render(request,"Sistema/estudiante.html",{'Estudiante':Materias})
 
 def NotaCurso(request,curso):
 
@@ -180,7 +189,7 @@ def NotaCurso(request,curso):
     
     NotaCurso = Notas.objects.filter(Id_Estudiante=Estudent.Id_Estudiante,Id_Materia=curso)
     
-    return render(request,"NotaCurso.html",{'Estudiante':NotaCurso})
+    return render(request,"Sistema/NotaCurso.html",{'Estudiante':NotaCurso})
 
 
 
@@ -206,7 +215,7 @@ def RegisterUsuario(request):
             sql.save()
             return redirect('/LoginUsuario')
     context = { 'form':Form}
-    return render(request,"RegisterUsuario.html", context )
+    return render(request,"Sistema/RegisterUsuario.html", context )
     
 def logoutUsuario(request):
     logout(request)
@@ -227,7 +236,7 @@ def LoginUsuario(request):
         else:
             messages.info(request, 'Username Or paSsword is incorrect ')
     context = {}
-    return render(request,"LoginUsuario.html",context)
+    return render(request,"Sistema/LoginUsuario.html",context)
 
 def AsignarSalon(request, Alumno):
     
@@ -273,12 +282,12 @@ def AsignarSalon(request, Alumno):
         sqlNotas.save()
         i=i+1
     context = {}
-    return render(request,"MostrarAlumnos.html",context)
+    return render(request,"Sistema/MostrarAlumnos.html",context)
 
 def MostrarAlumnosSinSalon(request):
     Mostrar=Estudiante.objects.filter(Salon__isnull=True)
     #Mostrar=Estudiante.objects.all()
-    return render(request,"MostrarAlumnos.html",{'Alumnos':Mostrar})
+    return render(request,"Sistema/MostrarAlumnos.html",{'Alumnos':Mostrar})
 
 
     

@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Sistema',
+    
+    'Sistema.apps.SistemaConfig',
     'bootstrap4',
     'fontawesome_5',
     'sweetify',
