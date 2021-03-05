@@ -290,5 +290,18 @@ def MostrarAlumnosSinSalon(request):
     return render(request,"Sistema/MostrarAlumnos.html",{'Alumnos':Mostrar})
 
 
-    
+def MostrarTablaDocentes(request):
+    Datos=Docente.objects.all()
+    context = { 
+        'Docente': Datos
+    }
+    return render(request,"Sistema/TablaDocente.html",context)
+
+def MostrarTablaEstudiantes(request):
+    Datos=Estudiante.objects.all()
+    context = { 
+        'Estudiante': Datos
+    }
+    return render(request,"Sistema/TablaEstudiante.html",context)
+
     

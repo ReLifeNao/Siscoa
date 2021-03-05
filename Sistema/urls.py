@@ -24,6 +24,8 @@ urlpatterns = [
     path('NotaCurso/<int:curso>/',views.NotaCurso,name='NotaCurso'),
     path('MostrarAlumnosSinSalon/',views.MostrarAlumnosSinSalon,name='MostrarAlumnosSinSalon'),
     path('AsignarSalon/<int:Alumno>',views.AsignarSalon,name='AsignarSalon'),
+    path('MostrarTablaDocente/',views.MostrarTablaDocentes,name='MostrarTablaDocente'),
+    path('MostrarTablaEstudiante/',views.MostrarTablaEstudiantes,name='MostrarTablaEstudiante'),
 
 
 ]
